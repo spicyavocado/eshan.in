@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — CalorieTracker</title>
+<meta name="description" content="Privacy policy for the CalorieTracker iOS app.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5c5c5c;
+    --rule: #e3e3e3;
+    --accent: #1f6f43;
+    --card: #f7f7f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --fg: #e8e8e6;
+      --muted: #9aa0a6;
+      --rule: #2b2f36;
+      --accent: #6cc38f;
+      --card: #1b1e24;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .5rem; letter-spacing: -.02em; }
+  h2 {
+    font-size: 1.15rem; margin: 2.5rem 0 .75rem; letter-spacing: -.01em;
+    padding-top: 1.5rem; border-top: 1px solid var(--rule);
+  }
+  h3 { font-size: 1rem; margin: 1.5rem 0 .5rem; }
+  p, li { color: var(--fg); }
+  .meta { color: var(--muted); font-size: .95rem; margin: 0; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  ul { padding-left: 1.25rem; }
+  li { margin: .4rem 0; }
+  .lede {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 1rem 1.25rem; margin: 1.5rem 0 0;
+  }
+  .lede p { margin: .5rem 0; }
+  .lede p:first-child { margin-top: 0; }
+  .lede p:last-child { margin-bottom: 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  .scroll { overflow-x: auto; margin: 1rem 0; }
+  th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; white-space: nowrap; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em;
+    background: var(--card); padding: .1em .35em; border-radius: 4px;
+  }
+  footer {
+    margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: .9rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Privacy Policy</h1>
+  <p class="meta">CalorieTracker for iOS · Last updated 29 July 2026</p>
+</header>
+
+<div class="lede">
+  <p><strong>The short version.</strong> CalorieTracker has no accounts and no
+  user database. Your profile, your food log, your photos and your training
+  history are stored on your iPhone and are not uploaded anywhere.</p>
+  <p>The one exception is the feature the app exists for: when you ask for a
+  meal to be estimated, that meal's photos and description are sent to the AI
+  model you have chosen so it can answer. There is no analytics SDK, no
+  advertising, and no tracking.</p>
+</div>
+
+<h2>Who this is from</h2>
+<p>CalorieTracker is an independent iOS app. Questions about this policy or
+about your data can go to
+<a href="mailto:daregroup9@gmail.com">daregroup9@gmail.com</a>.</p>
+
+<h2>What stays on your device</h2>
+<p>The following is stored locally on your iPhone, in the app's own storage,
+and is never transmitted to us or to anyone else:</p>
+<ul>
+  <li>Your body profile — height, weight, age, sex and activity level — and the
+      calorie goal calculated from it.</li>
+  <li>Every food entry: the estimated calories and macronutrients, the portion
+      weight, your edits, and the photos attached to the entry.</li>
+  <li>Your training setup (available equipment, chosen sports, session balance)
+      and your workout history, including the weights and reps you log.</li>
+  <li>App settings, such as your chosen model and whether haptics are on.</li>
+  <li>An API key, if you choose to enter one. It is held in the iOS Keychain
+      and is used only to talk to that provider.</li>
+</ul>
+<p>There is no cloud sync and no backup service operated by us. If your iPhone
+is backed up to iCloud or a computer, that backup is covered by Apple's
+privacy policy, not this one.</p>
+
+<h2>What leaves your device, and when</h2>
+<p>Nothing is sent anywhere until you ask for an estimate. When you log a meal
+by photo or by description, the app sends <em>that meal's</em> photos and text
+to the AI model you selected, and receives back a structured estimate. Your
+weight, your goal, your history and your other entries are not included in that
+request.</p>
+
+<h3>Two possible routes</h3>
+<p>Which one applies depends on how your copy of the app is set up:</p>
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>Route</th><th>What happens</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Your own API key</strong></td>
+      <td>The app talks to the provider directly from your phone, under your
+      key. Nothing passes through any server of ours.</td>
+    </tr>
+    <tr>
+      <td><strong>Shared proxy</strong></td>
+      <td>The request passes through a small Cloudflare Worker we operate,
+      which attaches the shared API key and forwards it to the provider. The
+      proxy does not store your photos or descriptions — it passes them
+      through and the response comes straight back.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Which providers</h3>
+<p>Depending on the model you pick, the recipient is Google (Gemini),
+Anthropic (Claude) or OpenAI (GPT). What each of them does with the data it
+receives is governed by their own terms:</p>
+<ul>
+  <li><a href="https://ai.google.dev/gemini-api/terms" rel="noopener">Google Gemini API terms</a></li>
+  <li><a href="https://www.anthropic.com/legal/privacy" rel="noopener">Anthropic privacy policy</a></li>
+  <li><a href="https://openai.com/policies/privacy-policy" rel="noopener">OpenAI privacy policy</a></li>
+</ul>
+<p>Requests are not tied to a name, an email address or an account, because the
+app never asks you for one.</p>
+
+<h2>What the proxy keeps</h2>
+<p>If your build uses the shared proxy, it keeps a small amount of operational
+data — enough to stop one device from spending the shared key on everyone
+else's behalf, and nothing more:</p>
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>Item</th><th>Why</th><th>Kept for</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A random identifier generated by the app on first launch</td>
+      <td>Counts requests per device against a daily quota. It is a random
+      value created on your phone — not your Apple ID, your phone number, your
+      advertising identifier, or anything that identifies you.</td>
+      <td>36 hours</td>
+    </tr>
+    <tr>
+      <td>A device attestation key identifier (Apple App Attest)</td>
+      <td>Confirms the request came from a genuine, unmodified copy of the app
+      rather than from a lifted credential.</td>
+      <td>90 days</td>
+    </tr>
+    <tr>
+      <td>Short-lived attestation challenges</td>
+      <td>A single-use value used during that check.</td>
+      <td>5 minutes</td>
+    </tr>
+    <tr>
+      <td>Operational logs (timestamps, status codes, errors)</td>
+      <td>Diagnosing outages. Meal photos and descriptions are not written to
+      logs.</td>
+      <td>A few days, then discarded by Cloudflare</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>As with any internet service, Cloudflare processes the network request
+itself — including your IP address — in order to route it. See the
+<a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Cloudflare privacy policy</a>.</p>
+
+<h2>Permissions the app asks for</h2>
+<ul>
+  <li><strong>Camera</strong> — to photograph a meal. Used only when you open
+      the camera from within the app.</li>
+  <li><strong>Photo library</strong> — to pick an existing photo of a meal. The
+      app receives only the photos you select; it does not read your library.</li>
+</ul>
+<p>Declining either permission simply means logging by typed description
+instead. The app requests no other permissions: no location, no contacts, no
+microphone, no health data, no notifications.</p>
+
+<h2>Tracking and advertising</h2>
+<p>There is none. CalorieTracker contains no analytics SDK, no crash-reporting
+SDK, no advertising, and no third-party trackers. It does not use the
+advertising identifier, does not build a profile of you, and does not share
+or sell data to anyone. Nothing is used for App Tracking Transparency purposes,
+which is why the app never shows that prompt.</p>
+
+<h2>Children</h2>
+<p>CalorieTracker is not directed at children and is not intended for anyone
+under 13. It collects no personal information knowingly from children. If you
+believe a child has used the app in a way that concerns you, contact us at the
+address above.</p>
+
+<h2>Deleting your data</h2>
+<ul>
+  <li><strong>Individual entries</strong> — delete a food entry or a workout log
+      inside the app; the entry and its photos go with it.</li>
+  <li><strong>Everything</strong> — delete the app from your iPhone. Because the
+      data lives only on the device, uninstalling removes all of it. There is
+      no account for us to delete, because none was ever created.</li>
+  <li><strong>Proxy records</strong> — the quota counter and attestation key
+      identifier expire on their own within the periods above. To have them
+      cleared sooner, email us; because they are random values, you will need
+      to be able to identify which one is yours.</li>
+</ul>
+
+<h2>Your rights</h2>
+<p>Depending on where you live, you may have rights to access, correct, export
+or delete personal data held about you — including under India's Digital
+Personal Data Protection Act, the EU/UK GDPR, and the CCPA. In practice this
+app holds almost nothing to exercise them against: your data is on your own
+device, under your own control, and we have no account records to hand over.
+For the limited proxy records described above, write to
+<a href="mailto:daregroup9@gmail.com">daregroup9@gmail.com</a>.</p>
+
+<h2>Not medical advice</h2>
+<p>Calorie and macronutrient figures are estimates produced by an AI model from
+a photo or a description, and can be wrong. The calorie goal is calculated from
+a standard population equation, not measured from your body. Nothing in the app
+is medical, dietary or fitness advice; talk to a qualified professional before
+making decisions about your diet or training.</p>
+
+<h2>Changes to this policy</h2>
+<p>If this policy changes, the revised version will be posted at this address
+with a new date at the top. Material changes will also be noted in the app's
+release notes.</p>
+
+<footer>
+  <p>CalorieTracker · <a href="/">eshan.in</a> ·
+  <a href="mailto:daregroup9@gmail.com">daregroup9@gmail.com</a></p>
+</footer>
+
+</div>
+</body>
+</html>
