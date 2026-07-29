@@ -8,12 +8,17 @@ step — edit a file, push to `main`, and Pages redeploys.
 ```
 index.html                          Landing page
 calorietracker/privacy/index.html   Privacy policy for the CalorieTracker iOS app
+calorietracker/support/index.html   Support page and FAQ
 CNAME                               Custom domain (eshan.in) — do not delete
 ```
 
+Both pages are URLs App Store Connect holds on file — the privacy policy and
+the support URL — so they have to keep resolving after release, not just up to
+review.
+
 The `CNAME` file is what tells GitHub Pages to answer for `eshan.in`. Removing
 it silently reverts the site to `spicyavocado.github.io/eshan.in`, which would
-break the privacy policy URL registered in App Store Connect.
+break both of them.
 
 ## DNS
 
