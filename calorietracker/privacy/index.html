@@ -71,16 +71,17 @@
 
 <header>
   <h1>Privacy Policy</h1>
-  <p class="meta">CalorieTracker for iOS · Last updated 29 July 2026</p>
+  <p class="meta">CalorieTracker for iOS · Last updated 4 August 2026</p>
 </header>
 
 <div class="lede">
   <p><strong>The short version.</strong> CalorieTracker has no accounts and no
-  user database. Your profile, your food log, your photos and your training
-  history are stored on your iPhone and are not uploaded anywhere.</p>
-  <p>The one exception is the feature the app exists for: when you ask for a
-  meal to be estimated, that meal's photos and description are sent to the AI
-  model you have chosen so it can answer. There is no analytics SDK, no
+  user database. Your profile, your food log, your photos, your weight history
+  and your training history are stored on your iPhone.</p>
+  <p>Two things are sent out, both to the AI model you have chosen, and each
+  covering only the entry you just made: a meal's photos and description, so it
+  can be estimated; and a workout journal entry's text, so it can be tidied up
+  and have the exercises picked out of it. There is no analytics SDK, no
   advertising, and no tracking.</p>
 </div>
 
@@ -90,8 +91,10 @@ about your data can go to
 <a href="mailto:daregroup9@gmail.com">daregroup9@gmail.com</a>.</p>
 
 <h2>What stays on your device</h2>
-<p>The following is stored locally on your iPhone, in the app's own storage,
-and is never transmitted to us or to anyone else:</p>
+<p>The following is stored locally on your iPhone, in the app's own storage.
+None of it is ever transmitted to us — we operate no user database — and none
+of it goes anywhere else except in the two cases spelled out in the next
+section:</p>
 <ul>
   <li>Your body profile — height, weight, age, sex and activity level — and the
       calorie goal calculated from it.</li>
@@ -99,6 +102,14 @@ and is never transmitted to us or to anyone else:</p>
       weight, your edits, and the photos attached to the entry.</li>
   <li>Your training setup (available equipment, chosen sports, session balance)
       and your workout history, including the weights and reps you log.</li>
+  <li>Your weight history — every weigh-in you record and the trend worked out
+      from it.</li>
+  <li>Anything Apple Health shares with the app, if you connect it: calories
+      burned, steps, your logged workouts and your body weight. This is read
+      into the app and shown to you; it is not sent anywhere.</li>
+  <li>Your workout journal entries, including the original wording of every
+      one. The text of an entry is sent to be tidied up — see below — but what
+      you actually wrote is always kept here alongside the result.</li>
   <li>App settings, such as your chosen model and whether haptics are on.</li>
   <li>An API key, if you choose to enter one. It is held in the iOS Keychain
       and is used only to talk to that provider.</li>
@@ -108,11 +119,23 @@ is backed up to iCloud or a computer, that backup is covered by Apple's
 privacy policy, not this one.</p>
 
 <h2>What leaves your device, and when</h2>
-<p>Nothing is sent anywhere until you ask for an estimate. When you log a meal
-by photo or by description, the app sends <em>that meal's</em> photos and text
-to the AI model you selected, and receives back a structured estimate. Your
-weight, your goal, your history and your other entries are not included in that
-request.</p>
+<p>Two things are sent, and both go to the AI model you selected. Nothing else
+you have logged ever leaves the app. (If your build uses the shared proxy, that
+route also carries a random device identifier for quota purposes — described in
+full further down.)</p>
+<ul>
+  <li><strong>Meals.</strong> When you log a meal by photo or by description,
+      <em>that meal's</em> photos and text are sent, and a structured estimate
+      — calories, macronutrients, portion weight — comes back.</li>
+  <li><strong>Workout journal entries.</strong> When you record a workout
+      journal entry, <em>that entry's</em> text is sent so it can be tidied up
+      for wording and have the exercises, sets, reps and weights picked out of
+      it. Your original wording is always kept on the device, and the app shows
+      it next to the tidied version so you can compare the two.</li>
+</ul>
+<p>In both cases only the entry you just made is sent. Your body profile, your
+weight, your calorie goal, your workout history, anything read from Apple
+Health, and your other entries are not included in either request.</p>
 
 <h3>Two possible routes</h3>
 <p>Which one applies depends on how your copy of the app is set up:</p>
@@ -131,8 +154,8 @@ request.</p>
       <td><strong>Shared proxy</strong></td>
       <td>The request passes through a small Cloudflare Worker we operate,
       which attaches the shared API key and forwards it to the provider. The
-      proxy does not store your photos or descriptions — it passes them
-      through and the response comes straight back.</td>
+      proxy does not store your photos, descriptions or journal text — it
+      passes them through and the response comes straight back.</td>
     </tr>
   </tbody>
 </table>
@@ -180,8 +203,8 @@ else's behalf, and nothing more:</p>
     </tr>
     <tr>
       <td>Operational logs (timestamps, status codes, errors)</td>
-      <td>Diagnosing outages. Meal photos and descriptions are not written to
-      logs.</td>
+      <td>Diagnosing outages. Meal photos, descriptions and journal text are
+      not written to logs.</td>
       <td>A few days, then discarded by Cloudflare</td>
     </tr>
   </tbody>
@@ -197,10 +220,25 @@ itself — including your IP address — in order to route it. See the
       the camera from within the app.</li>
   <li><strong>Photo library</strong> — to pick an existing photo of a meal. The
       app receives only the photos you select; it does not read your library.</li>
+  <li><strong>Apple Health</strong> — read-only, and only if you connect it.
+      The app reads the calories you have burned, your steps, your recorded
+      workouts and your body weight, so they can be shown alongside what you
+      track here. <strong>It never writes anything back to Health</strong>, and
+      nothing it reads from Health is sent off your device.</li>
+  <li><strong>Microphone and speech recognition</strong> — only if you choose to
+      dictate a workout journal entry rather than type it. The app asks iOS to
+      recognise your speech <strong>on the device itself</strong> wherever the
+      device supports that, which covers current iPhones; on hardware that does
+      not, iOS falls back to Apple's own speech recognition service, which is
+      covered by Apple's privacy policy rather than this one. Either way the
+      audio is not sent to us or to any AI provider. What you dictate becomes
+      text in the entry and is then treated exactly like text you typed.</li>
 </ul>
-<p>Declining either permission simply means logging by typed description
-instead. The app requests no other permissions: no location, no contacts, no
-microphone, no health data, no notifications.</p>
+<p>Every one of these is optional, and each is asked for at the point it is
+first needed rather than up front. Decline the camera or photo library and you
+can still log by typed description; decline Health or the microphone and the
+rest of the app is unaffected. The app requests no location, no contacts and no
+notifications, and it does not use the advertising identifier.</p>
 
 <h2>Tracking and advertising</h2>
 <p>There is none. CalorieTracker contains no analytics SDK, no crash-reporting
@@ -217,8 +255,9 @@ address above.</p>
 
 <h2>Deleting your data</h2>
 <ul>
-  <li><strong>Individual entries</strong> — delete a food entry or a workout log
-      inside the app; the entry and its photos go with it.</li>
+  <li><strong>Individual entries</strong> — delete a food entry, a workout log,
+      a journal entry or a weigh-in inside the app; the entry and anything
+      attached to it, photos included, goes with it.</li>
   <li><strong>Everything</strong> — delete the app from your iPhone. Because the
       data lives only on the device, uninstalling removes all of it. There is
       no account for us to delete, because none was ever created.</li>
