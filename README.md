@@ -6,7 +6,7 @@ step — edit a file, push to `main`, and Pages redeploys.
 ## Layout
 
 ```
-index.html                          Landing page
+index.html                          Redirects to linkedin.com/in/eshanzain
 calorietracker/privacy/index.html   Privacy policy for the CalorieTracker iOS app
 calorietracker/support/index.html   Support page and FAQ
 CNAME                               Custom domain (eshan.in) — do not delete
@@ -29,6 +29,12 @@ so records are edited in the Cloudflare dashboard, not GoDaddy.
 | ----- | ------- | ------------------------ | ---------- |
 | CNAME | `@`     | `spicyavocado.github.io` | DNS only   |
 | CNAME | `www`   | `spicyavocado.github.io` | DNS only   |
+| MX    | `@`     | `mx01.mail.icloud.com` (priority 10) | — |
+| MX    | `@`     | `mx02.mail.icloud.com` (priority 10) | — |
+| TXT   | `@`     | `v=spf1 include:icloud.com ~all` | — |
+| CNAME | `sig1._domainkey` | `sig1.dkim.eshan.in.at.icloudmailadmin.com` | DNS only |
+
+The MX, TXT and DKIM records are for iCloud Mail (hi@eshan.in).
 
 Cloudflare flattens the apex `CNAME` automatically. The record must stay
 **DNS only** (grey cloud) — proxying it prevents GitHub from issuing and
@@ -37,5 +43,5 @@ renewing the Let's Encrypt certificate for the custom domain.
 ## Adding another app's policy
 
 Copy `calorietracker/privacy/index.html` to `<appname>/privacy/index.html`,
-rewrite the content for that app, and add a card to `index.html`. The URL
+rewrite the content for that app, and push. The URL
 becomes `https://eshan.in/<appname>/privacy/`.
