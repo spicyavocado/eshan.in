@@ -3,58 +3,133 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>eshan.in</title>
-<meta name="description" content="eshan.in">
+<meta name="description" content="Eshan works in partnerships and builds iPhone apps on the side. LinkedIn, personal projects, and cat photos on request.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐈</text></svg>">
 <style>
   :root {
     --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c;
     --rule: #e3e3e3; --accent: #1f6f43; --card: #f7f7f5;
+    --accent-soft: rgba(31, 111, 67, .10);
+    --glow: rgba(46, 160, 98, .16); --dot: rgba(0, 0, 0, .07);
+    --term: #ffffff;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 40px -12px rgba(0,0,0,.14);
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #14161a; --fg: #e8e8e6; --muted: #9aa0a6;
-      --rule: #2b2f36; --accent: #6cc38f; --card: #1b1e24;
+      --rule: #2b2f36; --accent: #6cc38f; --card: #20242b;
+      --accent-soft: rgba(108, 195, 143, .10);
+      --glow: rgba(108, 195, 143, .13); --dot: rgba(255, 255, 255, .06);
+      --term: #1b1e24;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 48px -16px rgba(0,0,0,.6);
     }
   }
   * { box-sizing: border-box; }
+  html { min-height: 100%; background: var(--bg); }
   body {
-    margin: 0; background: var(--bg); color: var(--fg);
-    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0; min-height: 100vh; color: var(--fg); background:
+      radial-gradient(42rem 28rem at 85% -10%, var(--glow), transparent 70%),
+      radial-gradient(var(--dot) 1px, transparent 1px) 0 0 / 22px 22px,
+      var(--bg);
+    font: 17px/1.65 var(--sans);
     -webkit-text-size-adjust: 100%;
   }
-  .wrap { max-width: 40rem; margin: 0 auto; padding: 5rem 1.25rem; }
-  h1 { font-size: 2rem; margin: 0 0 .5rem; letter-spacing: -.02em; }
-  .meta { color: var(--muted); margin: 0 0 2.5rem; }
-  h2 { font-size: 1.05rem; margin: 0 0 1rem; color: var(--muted); font-weight: 600; }
-  a { color: var(--accent); text-underline-offset: 2px; }
-  .card {
-    display: block; background: var(--card); border: 1px solid var(--rule);
-    border-radius: 10px; padding: 1rem 1.25rem; text-decoration: none; color: inherit;
+  .wrap { max-width: 40rem; margin: 0 auto; padding: 6rem 1.25rem 4rem; }
+
+  /* intro */
+  .kicker { font: 500 .85rem/1 var(--mono); color: var(--accent); letter-spacing: .02em; margin: 0 0 1rem; }
+  h1 { font-size: clamp(2.2rem, 8vw, 3.4rem); line-height: 1.05; margin: 0 0 1rem; letter-spacing: -.035em; font-weight: 750; }
+  h1 .wave { display: inline-block; transform-origin: 70% 80%; animation: wave 2.2s ease-in-out .6s 2; }
+  h1 .name {
+    background: linear-gradient(transparent 62%, var(--accent-soft) 62%, var(--accent-soft) 92%, transparent 92%);
   }
-  .card strong { display: block; font-size: 1.05rem; }
-  .card span { color: var(--muted); font-size: .95rem; }
-  .card ul { margin: .75rem 0 0; padding-left: 1.25rem; font-size: .95rem; }
-  footer { margin-top: 4rem; color: var(--muted); font-size: .9rem; }
+  .tagline { color: var(--muted); margin: 0 0 3rem; font-size: 1.05rem; }
+
+  /* terminal */
+  .term { background: var(--term); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .bar { display: flex; align-items: center; gap: .45rem; padding: .7rem .9rem; background: var(--card); border-bottom: 1px solid var(--rule); }
+  .bar i { width: .7rem; height: .7rem; border-radius: 50%; background: #ff5f57; }
+  .bar i:nth-child(2) { background: #febc2e; }
+  .bar i:nth-child(3) { background: #28c840; }
+  .bar span { margin-left: .5rem; font: .8rem/1 var(--mono); color: var(--muted); }
+  .screen { padding: 1.1rem 1.1rem 1.25rem; font-family: var(--mono); }
+  .prompt { font-size: .9rem; color: var(--muted); margin: 0 0 .6rem; }
+  .prompt b { color: var(--accent); font-weight: 600; }
+  .prompt .cmd {
+    display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom;
+    width: 2ch; color: var(--fg); animation: type .3s steps(2) .25s both;
+  }
+  .cursor { display: inline-block; width: .55em; height: 1.05em; vertical-align: -.15em; background: var(--accent); animation: blink 1.1s steps(1) infinite; }
+
+  nav ul { list-style: none; margin: 0 0 .9rem; padding: 0; }
+  nav li { animation: rise .5s cubic-bezier(.2,.7,.2,1) both; }
+  nav li:nth-child(1) { animation-delay: .6s; }
+  nav li:nth-child(2) { animation-delay: .75s; }
+  nav li:nth-child(3) { animation-delay: .9s; }
+  nav a {
+    position: relative; overflow: hidden;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding: .8rem .85rem; margin: 0 -.35rem; border-radius: 9px;
+    color: var(--fg); text-decoration: none; transition: background .2s;
+  }
+  nav a:hover, nav a:focus-visible { background: var(--accent-soft); }
+  nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .label { font-weight: 600; font-size: 1.05rem; }
+  .label::before { content: "›"; display: inline-block; width: 0; opacity: 0; color: var(--accent); transition: width .2s, opacity .2s; }
+  nav a:hover .label::before, nav a:focus-visible .label::before { width: 1.1em; opacity: 1; }
+  .hint { color: var(--muted); font-size: .82rem; text-align: right; white-space: nowrap; }
+
+  /* the cat */
+  .fun .label { font-family: var(--sans); font-weight: 550; }
+  .walker { position: absolute; bottom: .05rem; left: -2rem; font-size: 1rem; pointer-events: none; opacity: 0; transform: scaleX(-1); }
+  .fun a:hover .walker, .fun a:focus-visible .walker { animation: walk 2.6s linear infinite; }
+
+  footer { margin-top: 2.5rem; color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  footer a { color: var(--accent); text-underline-offset: 2px; }
+
+  @keyframes wave { 0%,60%,100% { transform: rotate(0) } 10%,30% { transform: rotate(14deg) } 20% { transform: rotate(-8deg) } 40% { transform: rotate(-4deg) } 50% { transform: rotate(10deg) } }
+  @keyframes type { from { width: 0 } }
+  @keyframes blink { 50% { opacity: 0 } }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px) } }
+  @keyframes walk { 0% { left: -2rem; opacity: 1 } 100% { left: 100%; opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  @media (max-width: 30rem) {
+    .wrap { padding-top: 4rem; }
+    nav a { flex-direction: column; gap: .1rem; }
+    .hint { text-align: left; white-space: normal; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>eshan.in</h1>
-  <p class="meta">Personal site.</p>
+  <p class="kicker">~/eshan.in</p>
+  <h1><span class="wave">👋</span> hi, i'm <span class="name">eshan</span>.</h1>
+  <p class="tagline">I build partnerships with banks and lenders. Off the clock I build iPhone apps and take an unreasonable number of photos of my cat.</p>
 
-  <h2>Apps</h2>
-  <div class="card">
-    <strong>CalorieTracker</strong>
-    <span>An iOS calorie tracker with photo logging and a strength &amp;
-    conditioning program.</span>
-    <ul>
-      <li><a href="/calorietracker/support/">Support</a></li>
-      <li><a href="/calorietracker/privacy/">Privacy policy</a></li>
-    </ul>
+  <div class="term">
+    <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>eshan@eshan.in: ~</span></div>
+    <div class="screen">
+      <p class="prompt" aria-hidden="true"><b>eshan@eshan.in</b>:~$ <span class="cmd">ls</span></p>
+      <nav aria-label="Site">
+        <ul>
+          <li><a href="/linkedin/"><span class="label">/linkedin</span><span class="hint">the day job: partnerships</span></a></li>
+          <li><a href="/personal-projects/"><span class="label">/personal-projects</span><span class="hint">apps I build on the side</span></a></li>
+          <li class="fun"><a href="mailto:hi@eshan.in?subject=Cat%20photo%20request&amp;body=Hi%20Eshan%2C%0A%0AI%27d%20like%20to%20formally%20request%20a%20curated%20collection%20of%20your%20cat%20photos.%0A%0APreferred%20vibe%20(sleepy%20%2F%20chaotic%20%2F%20loaf)%3A%20%0AQuantity%3A%20as%20many%20as%20legally%20allowed%0A%0AThanks!"><span class="label">request a collection of my cat photos</span><span class="hint">just for fun 🐾</span><span class="walker" aria-hidden="true">🐈</span></a></li>
+        </ul>
+      </nav>
+      <p class="prompt" aria-hidden="true"><b>eshan@eshan.in</b>:~$ <span class="cursor"></span></p>
+    </div>
   </div>
 
   <footer>
-    <a href="mailto:daregroup9@gmail.com">daregroup9@gmail.com</a>
+    <a href="mailto:hi@eshan.in">hi@eshan.in</a>
+    <span>plain html, no trackers</span>
   </footer>
 </div>
 </body>
