@@ -87,6 +87,11 @@
   .fun .label { font-family: var(--sans); font-weight: 550; }
   .walker { position: absolute; bottom: .05rem; left: -2rem; font-size: 1rem; pointer-events: none; opacity: 0; transform: scaleX(-1); }
   .fun a:hover .walker, .fun a:focus-visible .walker { animation: walk 2.6s linear infinite; }
+  .fallback { margin: -.5rem 0 .9rem; padding: 0 .5rem; font-size: .85rem; color: var(--muted); animation: rise .4s cubic-bezier(.2,.7,.2,1) both; }
+  .fallback[hidden] { display: none; }
+  .fallback a, .fallback button { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .fallback button { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  .fallback a:focus-visible, .fallback button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 
   footer { margin-top: 2.5rem; color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   footer a { color: var(--accent); text-underline-offset: 2px; }
@@ -123,6 +128,7 @@
           <li class="fun"><a href="mailto:hi@eshan.in?subject=Cat%20photos%20please&amp;body=Hi%20Eshan%2C%20please%20send%20cat%20photos."><span class="label">request a collection of my cat photos</span><span class="hint">just for fun</span><span class="walker" aria-hidden="true">🐈</span></a></li>
         </ul>
       </nav>
+      <p class="fallback" id="cat-fallback" role="status" hidden>no email app popped up? <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=hi%40eshan.in&amp;su=Cat%20photos%20please&amp;body=Hi%20Eshan%2C%20please%20send%20cat%20photos." target="_blank" rel="noopener">open in Gmail</a> or <button type="button" id="cat-copy">copy hi@eshan.in</button></p>
       <p class="prompt" aria-hidden="true"><b>eshan@eshan.in</b>:~$ <span class="cursor"></span></p>
     </div>
   </div>
@@ -132,5 +138,18 @@
     <span>plain html, no trackers</span>
   </footer>
 </div>
+<script>
+  // The cat link is a mailto:, which does nothing in a browser with no mail app set up.
+  // After a click, also show a line with a Gmail link and a copy button.
+  (function () {
+    var link = document.querySelector('.fun a'), line = document.getElementById('cat-fallback'), copy = document.getElementById('cat-copy');
+    if (!link || !line || !copy) return;
+    link.addEventListener('click', function () { line.hidden = false; });
+    copy.addEventListener('click', function () {
+      var done = function () { copy.textContent = 'copied hi@eshan.in'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('hi@eshan.in').then(done, function () {});
+    });
+  })();
+</script>
 </body>
 </html>
