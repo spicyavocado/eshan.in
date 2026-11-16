@@ -6,7 +6,9 @@ step — edit a file, push to `main`, and Pages redeploys.
 ## Layout
 
 ```
-index.html                          Redirects to linkedin.com/in/eshanzain
+index.html                          Landing page
+linkedin/index.html                 Forwards to linkedin.com/in/eshanzain
+personal-projects/index.html        Lists the apps (links into /calorietracker/)
 calorietracker/privacy/index.html   Privacy policy for the CalorieTracker iOS app
 calorietracker/support/index.html   Support page and FAQ
 CNAME                               Custom domain (eshan.in) — do not delete
@@ -43,5 +45,6 @@ renewing the Let's Encrypt certificate for the custom domain.
 ## Adding another app's policy
 
 Copy `calorietracker/privacy/index.html` to `<appname>/privacy/index.html`,
-rewrite the content for that app, and push. The URL
+rewrite the content for that app, and add a card to
+`personal-projects/index.html`. The URL
 becomes `https://eshan.in/<appname>/privacy/`.
